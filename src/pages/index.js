@@ -5,6 +5,22 @@ import { useState } from "react";
 export default function Home() {
   const [taskList, setTaskList] = useState([]);
 
+  const handleDelete = (id) => {
+    const updatedList = taskList.filter((task) => task.id !== id);
+    setTaskList(updatedList);
+  };
+
+  const handleCheck = (id) => {
+  
+    const updatedTasks = taskList.map((task) =>
+      task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+    );
+
+    setTaskList(updatedTasks);
+  };
+
+  console.log('taskList', taskList)
+
   return (
     <div
       style={{
@@ -22,8 +38,13 @@ export default function Home() {
 
       <Form setTaskList={setTaskList} taskList={taskList} />
 
-      {taskList.map((task, id) => (
-        <Task key={id} task={task} />
+      {taskList.map((task, index) => (
+        <Task
+          key={index}
+          task={task}
+          onDelete={handleDelete}
+          onCheck={handleCheck}
+        />
       ))}
     </div>
   );
