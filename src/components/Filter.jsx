@@ -1,24 +1,12 @@
-// export const Filter = ({ setFilter }) => {
-//   const filterOptions = ["all", "completed", "active"];
-//   return (
-//     <div style={{ display: "flex", gap: "20px" }}>
-//       {filterOptions.map((filter, index) => (
-//         <div key={index}>
-//           <button onClick={() => setFilter(filter)}>{filter}</button>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
 import { useState } from "react";
 
 export const Filter = ({ setFilter }) => {
   const filterOptions = ["all", "completed", "active"];
-  const [activeFilter, setActiveFilter] = useState("all"); // аль товч идэвхтэй байгааг хадгална
+  const [activeFilter, setActiveFilter] = useState("all"); 
 
   const handleClick = (filter) => {
-    setFilter(filter);            // гаднаас ирсэн filter state-г шинэчилнэ
-    setActiveFilter(filter);      // дотоод идэвхтэй товчийг шинэчилнэ
+    setFilter(filter);         
+    setActiveFilter(filter);     
   };
 
   return (
