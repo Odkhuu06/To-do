@@ -1,25 +1,42 @@
+import { Filter } from "@/components/Filter";
 import { Form } from "@/components/Form";
 import { Task } from "@/components/Task";
+// import {Text} from "@/components/text";
 import { useState } from "react";
 
 export default function Home() {
   const [taskList, setTaskList] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   const handleDelete = (id) => {
-    const updatedList = taskList.filter((task) => task.id !== id);
-    setTaskList(updatedList);
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this task?"
+    );
+    if (confirmed) {
+      const updatedList = taskList.filter((task) => task.id !== id);
+      setTaskList(updatedList);
+    }
   };
 
-  const handleCheck = (id) => {
-  
-    const updatedTasks = taskList.map((task) =>
+  const toggleCheckBox = (id) => {
+    const toggledTask = taskList.map((task) =>
       task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
     );
 
-    setTaskList(updatedTasks);
+    setTaskList(toggledTask);
   };
 
-  console.log('taskList', taskList)
+  const filteredTask = taskList.filter((task) => {
+    if (filter === "active" && task.isCompleted === false) {
+      return task;
+    }
+    if (filter === "completed" && task.isCompleted === true) {
+      return task;
+    }
+    if (filter === "all") {
+      return task;
+    }
+  });
 
   return (
     <div
@@ -30,22 +47,29 @@ export default function Home() {
         flexDirection: "column",
         maxWidth: "345px",
         width: "100%",
+        filter: "drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3))",
         margin: "auto",
         gap: "10px",
       }}
     >
-      <h1>Todo List</h1>
+      <h1>To-Do list</h1>
 
       <Form setTaskList={setTaskList} taskList={taskList} />
 
-      {taskList.map((task, index) => (
-        <Task
-          key={index}
-          task={task}
-          onDelete={handleDelete}
-          onCheck={handleCheck}
-        />
-      ))}
+      <Filter setFilter={setFilter} />
+
+      {filteredTask.length === 0 ? (
+        <p>No tasks yet. Add one above!</p>
+      ) : (
+        filteredTask.map((task, id) => (
+          <Task
+            key={id}
+            task={task}
+            removeTaskById={handleDelete}
+            toggleCheckBox={toggleCheckBox}
+          />
+        ))
+      )}
     </div>
   );
 }

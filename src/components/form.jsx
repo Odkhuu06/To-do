@@ -9,6 +9,10 @@ export const Form = ({ setTaskList, taskList }) => {
   };
 
   const handleAdd = () => {
+    if (!inputValue.trim()) {
+      alert("Please enter a task!")
+      return;
+  }
     const newTask = {
       id: new Date(),
       taskName: inputValue,
@@ -27,6 +31,11 @@ export const Form = ({ setTaskList, taskList }) => {
           placeholder="Add a new task..."
           className={styles.taskInput}
           onChange={handleChange}
+            onKeyDown={(enter) => {
+    if (enter.key === "Enter") {
+      handleAdd();
+    }
+    }}
         />
       </div>
       <div>

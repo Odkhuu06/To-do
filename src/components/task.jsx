@@ -1,4 +1,8 @@
-export const Task = ({ task, onDelete, onCheck }) => {
+export const Task = ({ task, removeTaskById, toggleCheckBox }) => {
+  const handleToggleCheckBox = () => {
+    toggleCheckBox(task.id);
+  };
+
   return (
     <div
       style={{
@@ -10,19 +14,24 @@ export const Task = ({ task, onDelete, onCheck }) => {
         alignItems: "center",
       }}
     >
-      <div style={{ display: "flex", gap: "20px" }}>
+      <div style={{ display: "flex", gap: "20px", }}>
         <input
           type="checkbox"
-          checked={task.completed}
-          onChange={() => onCheck(task.id)}
+          checked={task.isCompleted}
+          onChange={handleToggleCheckBox}
         />
-        <p style={{textDecoration:task.isCompleted ? "line-through" : "" }}>
+        <p style={{ textDecoration: task.isCompleted ? "line-through" : " " }}>
           {task.taskName}
         </p>
       </div>
-      <div>
-        <button onClick={() => onDelete(task.id)}>Delete</button>
-      </div>
+      {task.isCompleted &&(
+        <button style={{   backgroundColor:" rgba(254, 242, 242, 1)",
+            color: "red",
+            border: "none",
+            padding: "5px 10px",
+            borderRadius: "4px",
+            cursor: "pointer",}} onClick={() => removeTaskById(task.id)}>Delete</button>
+      )}
     </div>
   );
 };
