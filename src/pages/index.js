@@ -1,6 +1,6 @@
 import { Filter } from "@/components/Filter";
-import { Form } from "@/components/form";
-import { Task } from "@/components/task";
+import { Form } from "@/components/Form";
+import { Task } from "@/components/Task";
 import { useState } from "react";
 
 export default function Home() {
