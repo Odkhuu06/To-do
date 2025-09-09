@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export const Filter = ({ setFilter }) => {
-  const filterOptions = ["all", "completed", "active"];
-  const [activeFilter, setActiveFilter] = useState("all"); 
+  const filterOptions = ["All", "Completed", "Active"];
+  const [activeFilter, setActiveFilter] = useState("All"); 
 
   const handleClick = (filter) => {
     setFilter(filter);         
@@ -18,13 +18,12 @@ export const Filter = ({ setFilter }) => {
           style={{
             backgroundColor: activeFilter === filter ? "rgba(60, 130, 246, 1)" : "white",
             color: activeFilter === filter ? "white" : "black",
-            border: "1px solid gray",
+            border: "0.5px solid gray",
             padding: "5px 10px",
             borderRadius: "5px",
             cursor: "pointer",
           }}
         >
-            {filter.charAt(0).toUpperCase().slice(0)}
           {filter}
         </button>
       ))}

@@ -14,7 +14,7 @@ export const Task = ({ task, removeTaskById, toggleCheckBox }) => {
         alignItems: "center",
       }}
     >
-      <div style={{ display: "flex", gap: "20px", }}>
+      <div style={{ display: "flex", gap: "20px"}}>
         <input
           type="checkbox"
           checked={task.isCompleted}
@@ -30,6 +30,7 @@ export const Task = ({ task, removeTaskById, toggleCheckBox }) => {
             border: "none",
             padding: "5px 10px",
             borderRadius: "4px",
+            marginRight:"20px",
             cursor: "pointer",}} onClick={() => removeTaskById(task.id)}>Delete</button>
       )}
     </div>
