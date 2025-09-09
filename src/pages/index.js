@@ -52,7 +52,7 @@ export default function Home() {
           display: "flex",
           flexDirection: "column",
           gap: "20px",
-          maxHeight: "600px", // card тогтмол өндөртэй
+          maxHeight: "600px", 
         }}
       >
         <h1
